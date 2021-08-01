@@ -15,16 +15,17 @@ export class CatsService {
     return readOnlyCats;
   }
 
-  async uploadImg(cat: Cat, files: Express.Multer.File[]) {
-    const fileName = `cats/${files[0].filename}`;
+  //* https://nestcats.s3.ap-northeast-2.amazonaws.com/cis/cats/cat01.jpg
+  //* file.key = /cis/cats/cat01.jpg
+  async uploadImg(cat: Cat, file: any) {
+    const fileName = file.key;
 
-    console.log('fileName : ' + fileName);
+    console.log(fileName);
 
     const newCat = await this.catsRepository.findByIdAndUpdateImg(
       cat.id,
       fileName,
     );
-    console.log('>>>> newCat');
     console.log(newCat);
     return newCat;
   }
