@@ -17,7 +17,7 @@ const typeOrmModuleOptions = {
   ): Promise<TypeOrmModuleOptions> => ({
     namingStrategy: new SnakeNamingStrategy(),
     type: 'postgres',
-    host: configService.get('DB_HOST'), // process.env.DB_HOST
+    host: configService.get('DB_HOST'), // process.env.DB_HOST 와 동일
     port: configService.get('DB_PORT'),
     username: configService.get('DB_USERNAME'),
     password: configService.get('DB_PASSWORD'),
@@ -35,6 +35,7 @@ const typeOrmModuleOptions = {
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      //* 스키마 validator
       validationSchema: Joi.object({
         NODE_ENV: Joi.string()
           .valid('development', 'production', 'test', 'provision')
@@ -59,4 +60,4 @@ const typeOrmModuleOptions = {
   ],
   controllers: [AppController],
 })
-export class AppModule {}
+export class AppModule { }

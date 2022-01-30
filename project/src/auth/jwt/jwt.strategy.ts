@@ -4,13 +4,14 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { CatsRepository } from 'src/cats/cats.repository';
 import { Payload } from './jwt.payload';
 
+//* 인증시 필요한 모듈
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly catsRepository: CatsRepository) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: process.env.JWT_SECRET,
-      ignoreExpiration: false,
+      ignoreExpiration: false, //* 토큰 만료 기한
     });
   }
 

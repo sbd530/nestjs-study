@@ -25,11 +25,11 @@ import { ConfigModule } from '@nestjs/config';
       basePath: 'cis',
       fileSize: 1 * 1024 * 1024,
     }),
-    MongooseModule.forFeature([{ name: Cat.name, schema: CatSchema }]),
-    forwardRef(() => AuthModule),
+    MongooseModule.forFeature([{ name: Cat.name, schema: CatSchema }]),// * 스키마 사용을 위해 모듈에 등록해야 한다.
+    forwardRef(() => AuthModule), //* Circular dependency 해결
   ],
   controllers: [CatsController],
   providers: [CatsService, CatsRepository],
   exports: [CatsService, CatsRepository],
 })
-export class CatsModule {}
+export class CatsModule { }

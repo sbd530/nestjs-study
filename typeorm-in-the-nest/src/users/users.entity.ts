@@ -18,6 +18,8 @@ export class UserEntity extends CommonEntity {
   @Column({ type: 'varchar', nullable: false })
   username: string
 
+  //* main.ts에서 인터셉터 추가 (ClassSerializerInterceptor)
+  //* DTO 생성시 제외하고 생성
   @Exclude()
   @Column({ type: 'varchar', nullable: false })
   password: string

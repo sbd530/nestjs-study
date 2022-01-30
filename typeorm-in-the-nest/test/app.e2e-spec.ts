@@ -3,6 +3,8 @@ import { INestApplication } from '@nestjs/common'
 import * as request from 'supertest'
 import { AppModule } from './../src/app.module'
 
+//TODO : 테스트를 위한 별도의 DB를 구축한다.
+//TODO : 트랜잭션 설정
 describe('AppController (e2e)', () => {
   let app: INestApplication
 
@@ -19,7 +21,7 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .get('/')
       .expect(200)
-      .expect('typeorm in nest, just coding')
+      .expect('typeorm in nest, just coding!!')
   })
 
   describe('hello jest', () => {
@@ -36,8 +38,8 @@ describe('AppController (e2e)', () => {
 
     it('/users (POST)', async () => {
       const res = await request(app.getHttpServer()).post('/users').send({
-        email: 'test@amamov.com',
-        password: '1205',
+        email: 'abcd@gmail.com',
+        password: '0000',
         username: 'test',
       })
 
@@ -54,8 +56,8 @@ describe('AppController (e2e)', () => {
 
   it('/users/login (POST)', async () => {
     const res = await request(app.getHttpServer()).post('/users/login').send({
-      email: 'test@amamov.com',
-      password: '1205',
+      email: 'abcd@gmail.com',
+      password: '0000',
     })
     expect(res.statusCode).toBe(200) // 201
     console.log(res.headers)

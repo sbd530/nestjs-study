@@ -4,6 +4,6 @@ import { Controller, Get } from '@nestjs/common'
 export class AppController {
   @Get()
   getRoot() {
-    return 'typeorm in nest, just coding'
+    return 'typeorm in nest, just coding!!'
   }
 }

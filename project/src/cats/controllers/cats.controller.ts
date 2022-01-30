@@ -29,12 +29,12 @@ export class CatsController {
   constructor(
     private readonly catsService: CatsService,
     private readonly authService: AuthService,
-  ) {}
-
+  ) { }
+  //* req를 그대로 받지 않고, 커스텀 데코레이터로 인자를 커스터마이징한다.
   @ApiOperation({ summary: '현재 고양이 가져오기' })
   @UseGuards(JwtAuthGuard)
   @Get()
-  getCurrentCat(@CurrentUser() cat) {
+  getCurrentCat(@CurrentUser() cat: Cat) {
     return cat.readOnlyData;
   }
 

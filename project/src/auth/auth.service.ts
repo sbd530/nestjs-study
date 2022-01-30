@@ -8,9 +8,9 @@ import { JwtService } from '@nestjs/jwt';
 export class AuthService {
   constructor(
     private readonly catsRepository: CatsRepository,
-    private jwtService: JwtService,
-  ) {}
-
+    private jwtService: JwtService, //* AuthModule에서 등록한 공급자
+  ) { }
+  //* 로그인 처리를 담당
   async jwtLogIn(data: LoginRequestDto) {
     const { email, password } = data;
 

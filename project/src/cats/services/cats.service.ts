@@ -7,7 +7,7 @@ import { CatsRepository } from '../cats.repository';
 
 @Injectable()
 export class CatsService {
-  constructor(private readonly catsRepository: CatsRepository) {}
+  constructor(private readonly catsRepository: CatsRepository) { }
 
   async getAllCat() {
     const allCat = await this.catsRepository.findAll();
@@ -35,11 +35,11 @@ export class CatsService {
     const isCatExist = await this.catsRepository.existByEmail(email);
 
     if (isCatExist) {
-      throw new UnauthorizedException('The cat already exists');
+      throw new UnauthorizedException('The cat already exists'); //* HttpException + StatusCode 의 효과
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-
+    const hashedPassword = await bcrypt.hash(password, 10); //* 비밀번호 해싱
+    //* 저장
     const cat = await this.catsRepository.create({
       email,
       name,

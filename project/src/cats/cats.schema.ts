@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory, SchemaOptions } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator'; //* 프로퍼티의 값을 특정 형식에 맞는지 검증
 import { Document } from 'mongoose';
 
 const options: SchemaOptions = {
@@ -53,7 +53,7 @@ export class Cat extends Document {
   @IsString()
   imgUrl: string;
 
-  readonly readOnlyData: {
+  readonly readOnlyData: { // * virtual 로 할당
     id: string;
     email: string;
     name: string;

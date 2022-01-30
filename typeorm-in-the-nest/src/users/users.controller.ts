@@ -28,7 +28,7 @@ export class UsersController {
     private readonly usersService: UsersService,
     @InjectRepository(UserEntity)
     private readonly usersRepository: Repository<UserEntity>,
-  ) {}
+  ) { }
 
   @Get()
   @UseGuards(JwtAuthGuard)
@@ -51,7 +51,9 @@ export class UsersController {
       userLoginDTO.email,
       userLoginDTO.password,
     )
-    response.cookie('jwt', jwt, { httpOnly: true })
+    response
+      .cookie('jwt', jwt, { httpOnly: true })
+      .status(200)
     return user
   }
 

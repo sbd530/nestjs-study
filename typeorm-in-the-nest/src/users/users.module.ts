@@ -10,7 +10,7 @@ import { UsersService } from './users.service'
 @Module({
   imports: [
     TypeOrmModule.forFeature([UserEntity]),
-    PassportModule.register({ defaultStrategy: 'jwt', session: true }),
+    PassportModule.register({ defaultStrategy: 'jwt', session: false }), // session: true
     JwtModule.register({
       secret: process.env.SECRET_KEY,
       secretOrPrivateKey: process.env.SECRET_KEY,
@@ -21,4 +21,4 @@ import { UsersService } from './users.service'
   controllers: [UsersController],
   exports: [UsersService],
 })
-export class UsersModule {}
+export class UsersModule { }

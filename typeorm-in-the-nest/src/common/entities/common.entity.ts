@@ -7,6 +7,8 @@ import {
 import { IsUUID } from 'class-validator'
 import { Exclude } from 'class-transformer'
 
+//* TypeORM 에는 BaseEntity라는 active-record 패턴을 위한 기본 클래스가 있다.
+//* 공통 프로퍼티를 정의하는 엔티티에서 이름을 BaseEntity로 지어서는 안된다.
 export abstract class CommonEntity {
   @IsUUID()
   @PrimaryGeneratedColumn('uuid')

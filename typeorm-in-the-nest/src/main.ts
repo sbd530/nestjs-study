@@ -25,12 +25,13 @@ class Application {
 
     if (!process.env.SECRET_KEY) this.logger.error('Set "SECRET" env')
     this.DEV_MODE = process.env.NODE_ENV === 'production' ? false : true
-    this.PORT = process.env.PORT || '5000'
+    this.PORT = process.env.PORT || '6000'
     this.corsOriginList = process.env.CORS_ORIGIN_LIST
       ? process.env.CORS_ORIGIN_LIST.split(',').map((origin) => origin.trim())
       : ['*']
-    this.ADMIN_USER = process.env.ADMIN_USER || 'amamov'
-    this.ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '1205'
+    //* Swagger
+    this.ADMIN_USER = process.env.ADMIN_USER || 'sbd530'
+    this.ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'sbd530'
   }
 
   private setUpBasicAuth() {
@@ -52,7 +53,7 @@ class Application {
       SwaggerModule.createDocument(
         this.server,
         new DocumentBuilder()
-          .setTitle('Yoon Sang Seok - API')
+          .setTitle('DON - API')
           .setDescription('TypeORM In Nest')
           .setVersion('0.0.1')
           .build(),
@@ -68,6 +69,7 @@ class Application {
     this.server.use(cookieParser())
     this.setUpBasicAuth()
     this.setUpOpenAPIMidleware()
+    //* DTO 등 validation 작동
     this.server.useGlobalPipes(
       new ValidationPipe({
         transform: true,
@@ -75,6 +77,7 @@ class Application {
     )
     this.server.use(passport.initialize())
     this.server.use(passport.session())
+    //* @Exclude() 데코레이터가 붙은 프로퍼티를 인터셉터 단계에서 제외시켜준다.
     this.server.useGlobalInterceptors(
       new ClassSerializerInterceptor(this.server.get(Reflector)),
     )
